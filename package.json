@@ -1,0 +1,25 @@
+{
+  "name": "namegen",
+  "version": "1.0.0",
+  "description": "A Node implementation of Chris Pound (http://generators.christopherpound.com/)'s Markov-chain based name generation algorithm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unarekin/namegen.git"
+  },
+  "keywords": [
+    "name",
+    "generator",
+    "namegen",
+    "random"
+  ],
+  "author": "Samuel Phelps",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Unarekin/namegen/issues"
+  },
+  "homepage": "https://github.com/Unarekin/namegen#readme"
+}
