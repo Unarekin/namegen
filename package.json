@@ -2,9 +2,15 @@
   "name": "namegen",
   "version": "1.0.0",
   "description": "A Node implementation of Chris Pound (http://generators.christopherpound.com/)'s Markov-chain based name generation algorithm.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha ./test/*.ts",
+    "build": "npx tsc -p ./tsconfig.json",
+    "parse:names": "npx ts-node src/parser.ts ./src/names/old ./src/names",
+    "minify": "npx minify dist/index.js > dist/index.min.js",
+    "clean": "npx rimraf dist",
+    "browserify": "npx browserify dist/index.js --standalone MarkovGenerator -o docs/scripts/generator.js",
+    "cleanbuild": "npm run clean && npm run build && npm run minify && npm run browserify"
   },
   "repository": {
     "type": "git",
@@ -21,5 +27,26 @@
   "bugs": {
     "url": "https://github.com/Unarekin/namegen/issues"
   },
-  "homepage": "https://github.com/Unarekin/namegen#readme"
+  "homepage": "https://github.com/Unarekin/namegen#readme",
+  "mocha": {
+    "require": [
+      "source-map-support/register",
+      "ts-node/register"
+    ],
+    "full-trace": true,
+    "reporter": "mochawesome",
+    "reporter-options": "reportFilename=report,reportTitle=Markov Generator Tests,reportPageTitle=Markov Generator Tests,reportDir=./test/reports"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.31",
+    "chai": "^4.3.1",
+    "minify": "^7.0.1",
+    "mocha": "^8.3.0",
+    "mochawesome": "^6.2.2",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  }
 }
