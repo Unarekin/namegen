@@ -1,10 +1,17 @@
 import { assert } from 'chai';
-import namegen from '../src';
+import { NameGenerator } from '../src';
+import { Graph } from '../src/graph';
+// import namegen from '../src';
+// import { namegen } from '../src';
 
 describe("Name Generator", () => {
-  let generator;
-  before("Creating generator", () => { generator = new namegen(); });
-  it("Has templates loaded", () => assert.notEqual(Object.keys(generator).length, 0));
+  const generator = new NameGenerator();
+
+  it("Arguments", () => {
+    generator.GenerateName("template", "subset");
+    generator.GenerateName(["test", "thing"]);
+    generator.GenerateName(new Graph());
+  })
 });
 
 // 'use strict'

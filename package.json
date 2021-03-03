@@ -2,7 +2,7 @@
   "name": "namegen",
   "version": "1.0.0",
   "description": "A Node implementation of Chris Pound (http://generators.christopherpound.com/)'s Markov-chain based name generation algorithm.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npx mocha ./test/*.ts",
     "build": "npx tsc -p ./tsconfig.json",
