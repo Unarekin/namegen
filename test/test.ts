@@ -1,16 +1,35 @@
 import { assert } from 'chai';
 import { NameGenerator } from '../src';
-import { Graph } from '../src/graph';
 // import namegen from '../src';
 // import { namegen } from '../src';
 
 describe("Name Generator", () => {
   const generator = new NameGenerator();
 
-  it("Arguments", () => {
-    generator.GenerateName("template", "subset");
-    generator.GenerateName(["test", "thing"]);
-    generator.GenerateName(new Graph());
+  function generateTemplateTest(template: string, subsets: string[]) {
+    it(template, () => {
+      for (let i = 0; i < subsets.length; i++) {
+        assert.isString(generator.GenerateName(template, subsets[i]), `Unable to generate a ${subsets[i]} name.`);
+      }
+    });
+  }
+
+  describe("Generates Names", () => {
+    assert.throws(() => generator.GenerateName("unknown", "template"), "Unknown template: unknown");
+    assert.throws(() => generator.GenerateName("ancient greek", "unknown"), "Unknown subset: unknown");
+    assert.throws(() => generator.GenerateName({ name: 'Test', subsets: { 'test': [] } }, "unknown"), "Unknown subset: unknown");
+
+    generateTemplateTest("Ancient Greek", ["female", "male"]);
+    generateTemplateTest("Arabic", ["female", "male", "surnames"]);
+    generateTemplateTest("Basque", ["female", "male"]);
+    generateTemplateTest("Celtic", ["female", "male"]);
+    generateTemplateTest("English", ["female", "male", "surnames"]);
+    generateTemplateTest("Hindi", ["female", "male"]);
+    generateTemplateTest("Japanese", ["female", "male"]);
+    generateTemplateTest("Latvian", ["female", "male"]);
+    generateTemplateTest("Modern Greek", ["female", "male", "surnames"]);
+    generateTemplateTest("Spanish", ["female", "male"]);
+    generateTemplateTest("Thai", ["female", "male"]);
   })
 });
 

@@ -2,6 +2,11 @@ export interface Hash<T> {
   [x: string]: T
 }
 
+export interface Subset {
+  originators: string[]
+  [x: string]: string[]
+}
+
 /**
  * 
  */
