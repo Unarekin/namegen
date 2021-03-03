@@ -38,7 +38,7 @@ export class Graph {
   // public GetEdge(label: string): any { return this._edgeHash[label]; }
 
   /** Returns list of edges for a given node */
-  public GetEdges(label: string): any[] {
+  public GetEdges(label: string): { label: string, data: any }[] {
     console.log("Edges:", this._linkHash[label]);
     return [];
     // return this._linkHash[label].map((edgeLabel: string) => {
