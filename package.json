@@ -9,8 +9,12 @@
     "parse:names": "npx ts-node src/parser.ts ./src/names/old ./src/names",
     "minify": "npx minify dist/index.js > dist/index.min.js",
     "clean": "npx rimraf dist",
-    "browserify": "npx browserify dist/index.js --standalone NameGen -o docs/scripts/generator.js",
-    "cleanbuild": "npm run clean && npm run build && npm run minify && npm run browserify"
+    "browserify": "npx browserify dist/index.js --standalone NameGen -o build/namegen.min.ts",
+    "cleanbuild": "npm run clean && npm run build && npm run minify && npm run browserify",
+    "compile:linux": "pkg ./dist/index.js -t latest-linux-x64 -o ./build/namegen",
+    "compile:win": "pkg ./dist/index.js -t latest-win-x64 -o ./build/namegen.exe",
+    "compile:all": "npm run compile:linux && npm run compile:win",
+    "build:all": "npm run clean && npm run build && npm run compile:all"
   },
   "repository": {
     "type": "git",
