@@ -12,7 +12,7 @@
     "browserify": "npx browserify dist/index.js --standalone NameGen -o build/namegen.min.ts",
     "cleanbuild": "npm run clean && npm run build && npm run minify && npm run browserify",
     "compile:linux": "pkg ./dist/index.js -t latest-linux-x64 -o ./build/namegen && pkg ./dist/parser.js -t latest-linux-x64 -o ./build/parser",
-    "compile:win": "pkg ./dist/index.js -t latest-win-x64 -o ./build/namegen.exe & &pkg ./dist/parser.js -t latest-win-x64 -o ./build/parser.exe",
+    "compile:win": "pkg ./dist/index.js -t latest-win-x64 -o ./build/namegen.exe && pkg ./dist/parser.js -t latest-win-x64 -o ./build/parser.exe",
     "compile:all": "npm run compile:linux && npm run compile:win && npm run browserify && npm run compile:names",
     "compile:names": "npx copyfiles ./src/names/*.json ./build/names/ -f",
     "build:all": "npm run clean && npm run build && npm run compile:all"
