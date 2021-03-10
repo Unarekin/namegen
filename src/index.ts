@@ -47,6 +47,16 @@ export class NameGenerator {
     }) as any;
   }
 
+
+  public HasSubset(template: string, subset: string): boolean {
+    if (!this._templateHash[template.toLowerCase()])
+      return false;
+    if (!this._templateHash[template.toLowerCase()].subsets[subset.toLowerCase()])
+      return false;
+
+    return true;
+  }
+
   public GenerateName(template: string, subset: string): string
   public GenerateName(template: NameFile, subset: string): string
   public GenerateName(subset: Subset): string
@@ -156,6 +166,10 @@ if (require.main === module) {
       let names: string[] = [];
 
       let templateName = generator.GetTemplateName(template);
+      if (!generator.HasSubset(template, subset))
+        throw new Error(`Unknown subset: ${subset}`);
+
+
 
       let header: string = `${qty} ${templateName} name${qty > 1 ? 's' : ''}:`;
       console.log(header);
@@ -166,9 +180,6 @@ if (require.main === module) {
         console.log(generator.GenerateName(template, subset))
 
       console.log(`Generated ${qty} names in ${time(Date.now() - start)}`);
-
-
-
     } catch (err) {
       console.error(err.message);
     }
