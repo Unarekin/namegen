@@ -4,6 +4,7 @@
  */
 
 import { promises as fs } from 'fs';
+import * as oldFS from 'fs';
 import * as path from 'path';
 
 import {
@@ -12,7 +13,17 @@ import {
   Subset
 } from './interfaces';
 import { NameFileParser } from './parser';
-import { default as NameFiles } from './names';
+
+let NameFiles = {};
+
+let files: string[] = oldFS
+  .readdirSync(path.join(process.cwd(), "./names/"))
+  .filter((file: string) => path.extname(file).toLowerCase() === ".json");
+
+for (let i = 0; i < files.length; i++) {
+  let template = JSON.parse(oldFS.readFileSync(path.join(process.cwd(), "names", files[i])).toString());
+  NameFiles[template.name.toLowerCase()] = template;
+}
 
 
 /**
