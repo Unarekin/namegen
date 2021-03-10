@@ -106,6 +106,30 @@ export { NameGenerator as namegen };
 if (require.main === module) {
   (async function () {
     try {
+
+      function time(duration: number): string {
+        let output: string[] = [];
+
+        let ms: number = duration;
+        let s: number = 0;
+        let m: number = 0;
+
+        if (ms > 1000 * 60) {
+          m = Math.floor(ms / (1000 * 60));
+          ms -= (m * 1000 * 60);
+          output.push(`${m}m`);
+        }
+        if (ms > 1000) {
+          s = Math.floor(ms / 1000);
+          ms -= s * 1000;
+          output.push(`${s}s`);
+        }
+
+        output.push(`${ms}ms`);
+
+        return output.join(" ");
+      }
+
       let generator = new NameGenerator();
       if (process.argv[2] == "templates") {
 
@@ -133,13 +157,17 @@ if (require.main === module) {
 
       let templateName = generator.GetTemplateName(template);
 
-      for (let i = 0; i < qty; i++)
-        names.push(generator.GenerateName(template, subset));
-
       let header: string = `${qty} ${templateName} name${qty > 1 ? 's' : ''}:`;
       console.log(header);
       console.log("=".repeat(header.length));
-      console.log(names.join("\n"));
+
+      let start = Date.now();
+      for (let i = 0; i < qty; i++)
+        console.log(generator.GenerateName(template, subset))
+
+      console.log(`Generated ${qty} names in ${time(Date.now() - start)}`);
+
+
 
     } catch (err) {
       console.error(err.message);
